@@ -13,7 +13,7 @@ namespace ModularFramework.Exceptions
 
         public Type ElementType { get; }
 
-        public override string Message => $"Failed to create an instance of the {ModuleName} layer element {ElementType.FullName}!";
+        public override string Message => $"Failed to create an instance of the {ModuleName} module element {ElementType.FullName}!";
 
         public string ModuleName { get; }
     }

@@ -58,7 +58,7 @@ namespace ModularFramework
             return module;
         }
 
-        public static IElementFactory GetFactory(string layerName) { return Modules[layerName.ToLowerInvariant()]; }
+        public static IElementFactory GetFactory(string moduleName) { return Modules[moduleName.ToLowerInvariant()]; }
 
         public static IElementFactory GetFactory(Type elementType)
         {

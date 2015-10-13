@@ -12,7 +12,7 @@ namespace ModularFramework.Exceptions
 
         public Type ElementType { get; }
 
-        public override string Message => $"No {ModuleName} layer elements found for type {ElementType.FullName}!";
+        public override string Message => $"No {ModuleName} module elements found for type {ElementType.FullName}!";
 
         public string ModuleName { get; }
     }

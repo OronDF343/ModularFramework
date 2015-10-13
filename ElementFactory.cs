@@ -56,7 +56,7 @@ namespace ModularFramework
             where TInterface : class //TElement
         {
             var elemType = typeof(TInterface);
-            if (!typeof(TElement).IsAssignableFrom(elemType)) throw new InvalidOperationException(elemType.Name + " does not belong to this layer!");
+            if (!typeof(TElement).IsAssignableFrom(elemType)) throw new InvalidOperationException(elemType.Name + " does not belong to this module!");
             var entries = _elements.Where(e => elemType.IsAssignableFrom(e) && (selector == null || selector(e)));
             var etype = entries.FirstOrDefault();
             if (etype == default(Type)) throw new ElementNotFoundException(ModuleInfo.ModuleName, elemType);
@@ -107,7 +107,7 @@ namespace ModularFramework
             where TInterface : class //TElement
         {
             var elemType = typeof(TInterface);
-            if (!typeof(TElement).IsAssignableFrom(elemType)) throw new InvalidOperationException(elemType.Name + " does not belong to this layer!");
+            if (!typeof(TElement).IsAssignableFrom(elemType)) throw new InvalidOperationException(elemType.Name + " does not belong to this module!");
             var entries = _elements.Where(e => elemType.IsAssignableFrom(e)
                                                  && (selector == null || selector(e))).ToList();
             if (entries.Count < 1) throw new ElementNotFoundException(ModuleInfo.ModuleName, elemType);
