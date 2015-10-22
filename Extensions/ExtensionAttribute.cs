@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 
 namespace ModularFramework.Extensions
 {
+    [Serializable]
     [AttributeUsage(AttributeTargets.Assembly)]
     public class ExtensionAttribute : Attribute
     {

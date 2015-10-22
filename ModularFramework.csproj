@@ -44,6 +44,7 @@
     <Compile Include="Annotations.cs" />
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Attributes\ElementAttribute.cs" />
+    <Compile Include="Extensions\ExtensionAttributeCollection.cs" />
     <Compile Include="Attributes\ModuleDefinitionAttribute.cs" />
     <Compile Include="Attributes\ModuleImplementationAttribute.cs" />
     <Compile Include="Attributes\OSFilterAttribute.cs" />
