@@ -44,7 +44,6 @@
     <Compile Include="Annotations.cs" />
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Attributes\ElementAttribute.cs" />
-    <Compile Include="Extensions\ExtensionAttributeCollection.cs" />
     <Compile Include="Attributes\ModuleDefinitionAttribute.cs" />
     <Compile Include="Attributes\ModuleImplementationAttribute.cs" />
     <Compile Include="Attributes\OSFilterAttribute.cs" />
@@ -54,6 +53,7 @@
     <Compile Include="Exceptions\ElementNotFoundException.cs" />
     <Compile Include="Exceptions\ProcessorArchitectureMismatchException.cs" />
     <Compile Include="Extensions\ExtensionAttribute.cs" />
+    <Compile Include="Extensions\ExtensionAttributeCollection.cs" />
     <Compile Include="Extensions\ExtensionUtils.cs" />
     <Compile Include="FolderUtils.cs" />
     <Compile Include="IElementFactory.cs" />
