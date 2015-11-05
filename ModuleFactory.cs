@@ -82,6 +82,10 @@ namespace ModularFramework
         {
             return GetFactory(typeof(TInterface)).GetElements<TInterface>(selector, errorCallback);
         }
+        public static object GetInstance(Type ttype)
+        {
+            return GetFactory(ttype).GetInstance(ttype);
+        }
 
         public static IEnumerable<IConfigurablePropertyInfo> GetAllConfigurableProperties(ErrorCallback errorCallback)
         {

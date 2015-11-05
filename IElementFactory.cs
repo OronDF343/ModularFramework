@@ -21,6 +21,21 @@ namespace ModularFramework
         IEnumerable<TInterface> GetElements<TInterface>(Func<Type, bool> selector = null, ErrorCallback errorCallback = null)
             where TInterface : class;
 
+        object GetInstance(Type ttype);
+        bool IsInstanceAvailable(Type ttype);
+        event EventHandler<InstanceCreatedEventArgs> InstanceCreated;
+
         IEnumerable<IConfigurablePropertyInfo> GetConfigurableProperties(ErrorCallback errorCallback);
+    }
+
+    public class InstanceCreatedEventArgs : EventArgs
+    {
+        public InstanceCreatedEventArgs(Type instanceType, object instance)
+        {
+            InstanceType = instanceType;
+            NewInstance = instance;
+        }
+        public Type InstanceType { get; }
+        public object NewInstance { get; }
     }
 }

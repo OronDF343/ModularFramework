@@ -62,25 +62,7 @@ namespace ModularFramework
             var etype = entries.FirstOrDefault();
             if (etype == default(Type)) throw new ElementNotFoundException(ModuleInfo.ModuleName, elemType);
 
-            if (_cache.ContainsKey(etype))
-            {
-                try { return _cache[etype] as TInterface; }
-                catch (Exception ex)
-                {
-                    throw new ElementCreationException(ModuleInfo.ModuleName, etype, ex);
-                }
-            }
-
-            try
-            {
-                var o = TryUtils.TryCreateInstance<TElement>(etype);
-                _cache.Add(etype, o);
-                return o as TInterface;
-            }
-            catch (Exception ex)
-            {
-                throw new ElementCreationException(ModuleInfo.ModuleName, etype, ex);
-            }
+            return GetInstance(etype) as TInterface;
         }
 
         /// <summary>
@@ -114,26 +96,10 @@ namespace ModularFramework
             if (entries.Count < 1) throw new ElementNotFoundException(ModuleInfo.ModuleName, elemType);
             foreach (var etype in entries)
             {
-                if (_cache.ContainsKey(etype))
-                {
-                    TInterface t;
-                    try { t = _cache[etype] as TInterface; }
-                    catch (Exception ex)
-                    {
-                        var x = new ElementCreationException(ModuleInfo.ModuleName, etype, ex);
-                        if (errorCallback == null) throw x;
-                        errorCallback(x);
-                        continue;
-                    }
-                    yield return t;
-                    continue;
-                }
-
-                TElement o;
+                TInterface i;
                 try
                 {
-                    o = TryUtils.TryCreateInstance<TElement>(etype);
-                    _cache.Add(etype, o);
+                    i = GetInstance(etype) as TInterface;
                 }
                 catch (Exception ex)
                 {
@@ -142,17 +108,52 @@ namespace ModularFramework
                     errorCallback(x);
                     continue;
                 }
-                yield return o as TInterface;
+                yield return i;
             }
+        }
+
+        public object GetInstance(Type ttype)
+        {
+            if (!_elements.Contains(ttype)) throw new InvalidOperationException(ttype.Name + " is not a valid implementation in this module!");
+
+            try
+            {
+                if (_cache.ContainsKey(ttype)) return _cache[ttype];
+                var o = TryUtils.TryCreateInstance<TElement>(ttype);
+                _cache.Add(ttype, o);
+                OnInstanceCreated(ttype, o);
+                return o;
+            }
+            catch (Exception ex)
+            {
+                throw new ElementCreationException(ModuleInfo.ModuleName, ttype, ex);
+            }
+        }
+        public bool IsInstanceAvailable(Type ttype)
+        {
+            return _cache.ContainsKey(ttype);
+        }
+
+        public event EventHandler<InstanceCreatedEventArgs> InstanceCreated;
+
+        protected virtual void OnInstanceCreated(Type t, object o)
+        {
+            InstanceCreated?.Invoke(this, new InstanceCreatedEventArgs(t, o));
         }
 
         public IEnumerable<IConfigurablePropertyInfo> GetConfigurableProperties(ErrorCallback errorCallback)
         {
-            return (from t in _elements
-                    let r = TryUtils.TryGetResult(() => ConfigurationUtils.GetProperties(t, errorCallback), errorCallback)
-                    where r != null
-                    from c in r
-                    select c).Distinct();
+            foreach (var t in _elements)
+            {
+                var r = TryUtils.TryGetResult(() => ConfigurationUtils.GetProperties(t, errorCallback), errorCallback);
+                if (r == null) continue;
+                foreach (var c in r)
+                {
+                    if (_cache.ContainsKey(t)) c.BoundObject = _cache[t];
+                    else c.SetWaitForInstance(this);
+                    yield return c;
+                }
+            }
         }
     }
 }
