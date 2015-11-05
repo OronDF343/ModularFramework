@@ -44,5 +44,18 @@ namespace ModularFramework
             }
             return o;
         }
+
+        public static TResult TryGetResult<TResult>(this Func<TResult> op, ErrorCallback ec)
+        {
+            try
+            {
+                return op();
+            }
+            catch (Exception ex)
+            {
+                ec(ex);
+                return default(TResult);
+            }
+        }
     }
 }

@@ -47,6 +47,10 @@
     <Compile Include="Attributes\ModuleDefinitionAttribute.cs" />
     <Compile Include="Attributes\ModuleImplementationAttribute.cs" />
     <Compile Include="Attributes\OSFilterAttribute.cs" />
+    <Compile Include="Configuration\ConfigurableElementAttribute.cs" />
+    <Compile Include="Configuration\ConfigurablePropertyAttribute.cs" />
+    <Compile Include="Configuration\ConfigurablePropertyInfo.cs" />
+    <Compile Include="Configuration\ConfigurationFactory.cs" />
     <Compile Include="ElementFactory.cs" />
     <Compile Include="Exceptions\ActivatorException.cs" />
     <Compile Include="Exceptions\ElementCreationException.cs" />
