@@ -146,7 +146,7 @@ namespace ModularFramework
             }
         }
 
-        public IEnumerable<ConfigurablePropertyInfo> GetConfigurableProperties(ErrorCallback errorCallback)
+        public IEnumerable<IConfigurablePropertyInfo> GetConfigurableProperties(ErrorCallback errorCallback)
         {
             return (from t in _elements
                     let r = TryUtils.TryGetResult(() => ConfigurationUtils.GetProperties(t, errorCallback), errorCallback)

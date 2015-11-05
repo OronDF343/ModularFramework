@@ -21,6 +21,6 @@ namespace ModularFramework
         IEnumerable<TInterface> GetElements<TInterface>(Func<Type, bool> selector = null, ErrorCallback errorCallback = null)
             where TInterface : class;
 
-        IEnumerable<ConfigurablePropertyInfo> GetConfigurableProperties(ErrorCallback errorCallback);
+        IEnumerable<IConfigurablePropertyInfo> GetConfigurableProperties(ErrorCallback errorCallback);
     }
 }

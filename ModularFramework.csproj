@@ -51,6 +51,7 @@
     <Compile Include="Configuration\ConfigurablePropertyAttribute.cs" />
     <Compile Include="Configuration\ConfigurablePropertyInfo.cs" />
     <Compile Include="Configuration\ConfigurationUtils.cs" />
+    <Compile Include="Configuration\IConfigurablePropertyInfo.cs" />
     <Compile Include="ElementFactory.cs" />
     <Compile Include="Exceptions\ActivatorException.cs" />
     <Compile Include="Exceptions\ElementCreationException.cs" />

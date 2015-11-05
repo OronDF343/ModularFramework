@@ -83,7 +83,7 @@ namespace ModularFramework
             return GetFactory(typeof(TInterface)).GetElements<TInterface>(selector, errorCallback);
         }
 
-        public static IEnumerable<ConfigurablePropertyInfo> GetAllConfigurableProperties(ErrorCallback errorCallback)
+        public static IEnumerable<IConfigurablePropertyInfo> GetAllConfigurableProperties(ErrorCallback errorCallback)
         {
             return Modules.Values.SelectMany(f => f.GetConfigurableProperties(errorCallback)).Distinct();
         } 
