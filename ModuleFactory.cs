@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ModularFramework.Attributes;
+using ModularFramework.Configuration;
 
 namespace ModularFramework
 {
@@ -81,5 +82,10 @@ namespace ModularFramework
         {
             return GetFactory(typeof(TInterface)).GetElements<TInterface>(selector, errorCallback);
         }
+
+        public static IEnumerable<ConfigurablePropertyInfo> GetAllConfigurableProperties(ErrorCallback errorCallback)
+        {
+            return Modules.Values.SelectMany(f => f.GetConfigurableProperties(errorCallback)).Distinct();
+        } 
     }
 }

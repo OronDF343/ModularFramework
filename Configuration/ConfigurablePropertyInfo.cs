@@ -14,12 +14,24 @@ namespace ModularFramework.Configuration
 
         public bool IsDefined(object elem)
         {
-            return ElementType.IsAssignableFrom(elem.GetType()) && elem.GetType().GetProperty(PropertyInfo.Name) != null;
+            return ElementType.IsInstanceOfType(elem) && elem.GetType().GetProperty(PropertyInfo.Name) != null;
         }
 
         public string Name { get; }
         public PropertyInfo PropertyInfo { get; }
         public Type ElementType { get; }
 
+        public override bool Equals(object obj)
+        {
+            var info = obj as ConfigurablePropertyInfo;
+            if (info != null)
+                return Name.Equals(info.Name) && ElementType == info.ElementType;
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }

@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace ModularFramework.Configuration
 {
-    public class ConfigurationFactory
+    public static class ConfigurationUtils
     {
         /// <summary>
         /// Gets all the configurable properties of the specified element type.
         /// </summary>
-        /// <param name="element">The element type. Must be a class with the <see cref="ConfigurableElementAttribute">ConfigurableElementAttribute</see> attribute.</typeparam>
+        /// <param name="element">The element type. Must be a class with the <see cref="ConfigurableElementAttribute">ConfigurableElementAttribute</see> attribute.</param>
         /// <param name="errorCallback">An <see cref="ErrorCallback">ErrorCallback</see>.</param>
         /// <returns>All the configurable properties found on the element.</returns>
-        IEnumerable<ConfigurablePropertyInfo> GetProperties(Type element, ErrorCallback errorCallback)
+        public static IEnumerable<ConfigurablePropertyInfo> GetProperties(Type element, ErrorCallback errorCallback)
         {
             if (!Attribute.IsDefined(element, typeof(ConfigurableElementAttribute)))
                 throw new InvalidOperationException("This element is not configurable!");
@@ -20,7 +20,7 @@ namespace ModularFramework.Configuration
                    where Attribute.IsDefined(p, typeof(ConfigurablePropertyAttribute))
                    let a = p.GetAttribute<ConfigurablePropertyAttribute>()
                    let r = TryUtils.TryGetResult(() => new ConfigurablePropertyInfo(p, a), errorCallback)
-                   where r != default(ConfigurablePropertyInfo)
+                   where !r.Equals(default(ConfigurablePropertyInfo))
                    select r;
         }
     }

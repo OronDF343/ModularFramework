@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using ModularFramework.Attributes;
+using ModularFramework.Configuration;
 
 namespace ModularFramework
 {
@@ -19,5 +20,7 @@ namespace ModularFramework
             where TInterface : class;
         IEnumerable<TInterface> GetElements<TInterface>(Func<Type, bool> selector = null, ErrorCallback errorCallback = null)
             where TInterface : class;
+
+        IEnumerable<ConfigurablePropertyInfo> GetConfigurableProperties(ErrorCallback errorCallback);
     }
 }

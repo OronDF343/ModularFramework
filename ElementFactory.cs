@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ModularFramework.Attributes;
+using ModularFramework.Configuration;
 using ModularFramework.Exceptions;
 
 namespace ModularFramework
@@ -143,6 +144,15 @@ namespace ModularFramework
                 }
                 yield return o as TInterface;
             }
+        }
+
+        public IEnumerable<ConfigurablePropertyInfo> GetConfigurableProperties(ErrorCallback errorCallback)
+        {
+            return (from t in _elements
+                    let r = TryUtils.TryGetResult(() => ConfigurationUtils.GetProperties(t, errorCallback), errorCallback)
+                    where r != null
+                    from c in r
+                    select c).Distinct();
         }
     }
 }
