@@ -2,9 +2,16 @@
 
 namespace ModularFramework.Configuration
 {
-    [AttributeUsage(AttributeTargets.Property, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class ConfigurablePropertyAttribute : Attribute
     {
-        public string Name { get; set; }
+        public ConfigurablePropertyAttribute() { }
+
+        public ConfigurablePropertyAttribute(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; }
     }
 }

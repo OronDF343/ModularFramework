@@ -361,7 +361,7 @@ namespace ModularFramework
         /// </summary>
         InstantiatedWithFixedConstructorSignature = 4,
         /// <summary>Indicates implicit instantiation of a type.</summary>
-        InstantiatedNoFixedConstructorSignature = 8,
+        InstantiatedNoFixedConstructorSignature = 8
     }
 
     /// <summary>
@@ -804,7 +804,7 @@ namespace ModularFramework
         /// <summary>Marked parameter should be evaluated to null value.</summary>
         IS_NULL = 2,
         /// <summary>Marked parameter should be evaluated to not null value.</summary>
-        IS_NOT_NULL = 3,
+        IS_NOT_NULL = 3
     }
 
     /// <summary>

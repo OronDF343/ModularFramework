@@ -2,7 +2,7 @@
 
 namespace ModularFramework.Configuration
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
     public class ConfigurableElementAttribute : Attribute
     {
 

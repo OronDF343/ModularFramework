@@ -9,7 +9,7 @@ namespace ModularFramework.Configuration
     {
         public ConfigurablePropertyInfo(PropertyInfo pi, ConfigurablePropertyAttribute cpa)
         {
-            Name = cpa.Name;
+            Name = cpa.Name ?? pi.DeclaringType?.FullName + pi.Name;
             PropertyInfo = pi;
         }
 
