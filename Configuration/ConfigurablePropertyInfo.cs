@@ -33,7 +33,7 @@ namespace ModularFramework.Configuration
             get { return BoundObject == null ? _value : PropertyInfo.GetValue(BoundObject); }
             set
             {
-                if (BoundObject == null) PropertyInfo.SetValue(BoundObject, value);
+                if (BoundObject != null) PropertyInfo.SetValue(BoundObject, value);
                 else _value = value;
                 OnPropertyChanged();
             }
