@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -12,10 +14,13 @@ namespace ModularFramework.Configuration
             Name = cpa.Name ?? pi.DeclaringType?.FullName + "." + pi.Name;
             PropertyInfo = pi;
             DefaultValue = cpa.DefaultValue;
+            _options = ElementType.GetProperties().FirstOrDefault(p => p.GetAttribute<PropertyOptionsEnumeratorAttribute>().PropertyName == Name && typeof(IEnumerable).IsAssignableFrom(p.PropertyType));
         }
 
         public string Name { get; }
         public object DefaultValue { get; set; }
+        private readonly PropertyInfo _options;
+        public IEnumerable ValidValues => (IEnumerable)_options.GetValue(BoundObject);
         public PropertyInfo PropertyInfo { get; }
         public Type ElementType => typeof(TElement);
 
