@@ -14,7 +14,7 @@ namespace ModularFramework.Configuration
             Name = cpa.Name ?? pi.DeclaringType?.FullName + "." + pi.Name;
             PropertyInfo = pi;
             DefaultValue = cpa.DefaultValue;
-            _options = ElementType.GetProperties().FirstOrDefault(p => p.GetAttribute<PropertyOptionsEnumeratorAttribute>().PropertyName == Name && typeof(IEnumerable).IsAssignableFrom(p.PropertyType));
+            _options = ElementType.GetProperties().FirstOrDefault(p => p.GetAttribute<PropertyOptionsEnumeratorAttribute>()?.PropertyName == Name && typeof(IEnumerable).IsAssignableFrom(p.PropertyType));
         }
 
         public string Name { get; }
