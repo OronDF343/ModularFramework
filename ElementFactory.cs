@@ -145,7 +145,7 @@ namespace ModularFramework
         {
             foreach (var t in _elements)
             {
-                var r = TryUtils.TryGetResult(() => ConfigurationUtils.GetProperties(t, errorCallback), errorCallback);
+                var r = ConfigurationUtils.GetProperties(t, errorCallback);
                 if (r == null) continue;
                 foreach (var c in r)
                 {

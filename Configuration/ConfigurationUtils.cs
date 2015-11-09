@@ -11,11 +11,11 @@ namespace ModularFramework.Configuration
         /// </summary>
         /// <param name="element">The element type. Must be a class with the <see cref="ConfigurableElementAttribute">ConfigurableElementAttribute</see> attribute.</param>
         /// <param name="errorCallback">An <see cref="ErrorCallback">ErrorCallback</see>.</param>
-        /// <returns>All the configurable properties found on the element.</returns>
+        /// <returns>All the configurable properties found on the element, or null if the element is not configurable.</returns>
         public static IEnumerable<IConfigurablePropertyInfo> GetProperties(Type element, ErrorCallback errorCallback)
         {
             if (!Attribute.IsDefined(element, typeof(ConfigurableElementAttribute)))
-                throw new InvalidOperationException("This element is not configurable!");
+                return null;
             var t = typeof(ConfigurablePropertyInfo<object>).GetGenericTypeDefinition();
             return from p in element.GetProperties()
                    where Attribute.IsDefined(p, typeof(ConfigurablePropertyAttribute))
