@@ -11,9 +11,11 @@ namespace ModularFramework.Configuration
         {
             Name = cpa.Name ?? pi.DeclaringType?.FullName + pi.Name;
             PropertyInfo = pi;
+            DefaultValue = cpa.DefaultValue;
         }
 
         public string Name { get; }
+        public object DefaultValue { get; set; }
         public PropertyInfo PropertyInfo { get; }
         public Type ElementType => typeof(TElement);
 
