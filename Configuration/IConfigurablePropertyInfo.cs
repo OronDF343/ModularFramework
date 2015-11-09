@@ -7,6 +7,7 @@ namespace ModularFramework.Configuration
     public interface IConfigurablePropertyInfo : INotifyPropertyChanged
     {
         string Name { get; }
+        object DefaultValue { get; set; }
         PropertyInfo PropertyInfo { get; }
         Type ElementType { get; }
         object BoundObject { get; set; }
