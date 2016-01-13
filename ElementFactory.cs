@@ -70,7 +70,6 @@ namespace ModularFramework
         /// </summary>
         /// <param name="errorCallback"></param>
         /// <returns></returns>
-        /// <exception cref="ElementNotFoundException"></exception>
         /// <exception cref="ElementCreationException"></exception>
         public IEnumerable<TInterface> GetElements<TInterface>(ErrorCallback errorCallback)
             where TInterface : class //TElement
@@ -84,7 +83,6 @@ namespace ModularFramework
         /// <param name="selector"></param>
         /// <param name="errorCallback"></param>
         /// <returns></returns>
-        /// <exception cref="ElementNotFoundException"></exception>
         /// <exception cref="ElementCreationException"></exception>
         public IEnumerable<TInterface> GetElements<TInterface>(Func<Type, bool> selector = null, ErrorCallback errorCallback = null)
             where TInterface : class //TElement
@@ -93,7 +91,6 @@ namespace ModularFramework
             if (!typeof(TElement).IsAssignableFrom(elemType)) throw new InvalidOperationException(elemType.Name + " does not belong to this module!");
             var entries = _elements.Where(e => elemType.IsAssignableFrom(e)
                                                  && (selector == null || selector(e))).ToList();
-            if (entries.Count < 1) throw new ElementNotFoundException(ModuleInfo.ModuleName, elemType);
             foreach (var etype in entries)
             {
                 TInterface i;
